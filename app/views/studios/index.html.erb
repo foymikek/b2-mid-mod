@@ -1,0 +1,8 @@
+Index of Studios: <% @studios.each do |studio| %>
+  <section id="studio-<%= studio.id %>">
+    <%= studio.name  %>
+    <% studio.movies.each do |movie| %>
+        <%= movie.title  %>
+    <% end %>
+  </section>
+<% end %>

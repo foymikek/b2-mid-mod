@@ -9,20 +9,19 @@ RSpec.describe "When I visit studio index page" do
     movie_3 = studio_2.movies.create!(title: "Scard Cat", creation_year: "2008", genre: "Thriller")
     movie_4 = studio_2.movies.create!(title: "Leahs Romance", creation_year: "2008", genre: "Romance")
 
-    # Story 1 As a user, When I visit the studio index page
     visit "/studios"
-    # I see a list of all of the movie studios And underneath each studio,
-    within("#studio-name-#{studio_1.id}") do
+
+    within("#studio-#{studio_1.id}") do
       expect(page).to have_content(studio_1.name)
-      expect(page).to have_content(movie_1.name)
-      expect(page).to have_content(movie_2.name)
+      expect(page).to have_content(movie_1.title)
+      expect(page).to have_content(movie_2.title)
     end
 
-    within("#studio-name-#{studio_2.id}") do
+    within("#studio-#{studio_2.id}") do
       expect(page).to have_content(studio_2.name)
-      expect(page).to have_content(movie_3.name)
-      expect(page).to have_content(movie_4.name)
+      expect(page).to have_content(movie_3.title)
+      expect(page).to have_content(movie_4.title)
     end
-    # I see the names of all of its movies.
+
   end
 end
