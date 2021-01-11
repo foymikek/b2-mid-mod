@@ -33,5 +33,12 @@ RSpec.describe Actor, type: :model do
 
       expect(Actor.average_age).to eq(22)
     end
+    it "can search actor by name" do
+      actor_1 = Actor.create!(name: "Denver Dean", age: 22)
+      Actor.create!(name: "Maryloue", age: 20)
+      Actor.create!(name: "Sal", age: 24)
+
+      expect(Actor.search_by_name("Denver Dean")).to eq(actor_1)
+    end
   end
 end

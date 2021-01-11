@@ -20,4 +20,25 @@ RSpec.describe "When I visit a movies show page" do
     expect(actor_1.name).to appear_before(actor_3.name)
     expect(page).to have_content("Average actors age: 22")
   end
+
+  it "can add an actor to the movie" do
+    studio_1 = Studio.create!(name: "Star Productions", location: "Milkyway")
+    movie_1 = studio_1.movies.create!(title: "Louies Adventure", creation_year: "2008", genre: "Comedy")
+    actor_1 = Actor.create!(name: "Denver Dean", age: 22)
+
+    visit movie_path(movie_1.id)
+    expect(page).to_not have_content(actor_1.name)
+
+    fill_in :name, with: "Denver Dean"
+    fill_in :age, with: 22
+    click_button "Submit"
+
+    new_movie_actor = MovieActor.last
+
+    expect(new_movie_actor.actor_id).to eq(actor_1.id)
+    expect(new_movie_actor.movie_id).to eq(movie_1.id)
+    expect(current_path).to eq(movie_path(movie_1.id))
+
+    expect(page).to have_content(actor_1.name)
+  end
 end

@@ -9,4 +9,8 @@ class Actor < ApplicationRecord
   def self.average_age
     average(:age)
   end
+
+  def self.search_by_name(name_arg)
+    find_by(name: name_arg)
+  end
 end
