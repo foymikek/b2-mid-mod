@@ -9,14 +9,14 @@ RSpec.describe "When I visit studio index page" do
     movie_3 = studio_2.movies.create!(title: "Scard Cat", creation_year: "2008", genre: "Thriller")
     movie_4 = studio_2.movies.create!(title: "Leahs Romance", creation_year: "2008", genre: "Romance")
 
-    visit "/studios"
+    visit studios_path
 
     within("#studio-#{studio_1.id}") do
       expect(page).to have_content(studio_1.name)
       expect(page).to have_content(movie_1.title)
       expect(page).to have_content(movie_2.title)
     end
-
+    
     within("#studio-#{studio_2.id}") do
       expect(page).to have_content(studio_2.name)
       expect(page).to have_content(movie_3.title)
